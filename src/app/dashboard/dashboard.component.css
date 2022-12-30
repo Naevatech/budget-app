@@ -1,0 +1,14 @@
+#dash {
+    margin-top: 80px;
+}
+#dashAmount {
+    background-color: #e4e4e4;
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    padding: 10px;
+    justify-content: left;
+}
+.headText {
+    margin: 3px 10px 0 0;
+}

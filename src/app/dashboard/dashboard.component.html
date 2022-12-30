@@ -1,0 +1,163 @@
+<div>
+    <div class="container" id="dash">
+        <div class="row">
+            <div class="col-12 col-md-3" >
+                <div class="d-flex mb-3" id="dashAmount">
+                    <h6 class="headText">Budget Date:</h6>
+                    <h6 class="headText">{{cartBudget.budgetDate}}</h6>
+                </div>
+
+                <div class="d-flex mb-3" id="dashAmount">
+                    <h6 class="headText">Budget Amount</h6>
+                    <h6 class="headText">N{{cartBudget.budgetAmount}}</h6>
+                </div>
+
+                <div class="d-flex mb-3" id="dashAmount">
+                    <h6 class="headText">Amount Spent:</h6>
+                    <h6 class="headText">300</h6>
+                </div>
+            </div>
+            <div class=" col-12 col-md-3">
+                <div class="d-flex mb-3" id="dashAmount">
+                    <h6 class="headText">Budget Amount:</h6>
+                    <h6 class="headText">500</h6>
+                </div>
+                
+                <div class="d-flex mb-3" id="dashAmount">
+                    <p class="headText text-danger" style="margin:-10px 0 0 0 ;">{{message1}}</p>
+                    <!-- <h6 class="headText">300</h6> -->
+                </div>
+                
+                <div class="d-flex mb-3" id="dashAmount">
+                    <h6 class="headText">Amount Spent:</h6>
+                    <h6 class="headText">300</h6>
+                </div>
+                
+            </div>
+            <div class=" col-12 col-md-6 p-4" >
+                ...
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mt-4">
+    <div class="container">
+        <div class="row p-4 gap-4">
+            <div class="col-12 col-md-4 shadow-sm mb-5 p-4" >
+                <div class="col mb-2 ">
+                    <div class=" mb-3 p-2">
+                        <div>
+                            <h6>Create Item List</h6>
+                        </div>
+                        <div class="col mb-2">
+                            <div class="form-outline">
+                                <label class="form-label h6" for="form3Example1">Name</label>
+                                <input type="text" id="form3Example1" class="form-control" placeholder="Enter your expenses"   [(ngModel)]="budgetName"/>
+                            </div>
+                        </div>
+    
+                        <div class="col mb-2">
+                            <div class="form-outline">
+                                <label class="form-label h6" for="form3Example2">Qty</label>
+                                <input type="number" id="form3Example2" class="form-control" placeholder="No. of product"  [(ngModel)]="budgetQty"/>
+                            </div>
+                        </div>
+    
+                        <div class="col">
+                            <div class="form-outline">
+                                <label class="form-label h6" for="form3Example2" >Cost</label>
+                                <input type="number" id="form3Example2" class="form-control"  placeholder="Enter the cost"  [(ngModel)]="budgetCost"/>
+                            </div>
+                        </div>
+
+                        <div class="col-10 d-grid ms-5 mt-4" style="justify-self:center;">
+                            <button class="btn btn-outline-primary" (click)="addToList()">Add Item</button>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+            <div class=" col-12 col-md-6 p-4 shadow-sm">
+                <div class="row gap-3">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr  >
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Delete</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">View</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let id=index, let x of cart">
+                                <th scope="row">{{id+1}}</th>
+                                <td>{{x.budgetName}}</td>
+                                <td><i class="ph-x btn  btn btn-danger" (click)="deleteCart(id)"></i></td>
+                                <td><i class="ph-pencil-simple-line btn btn-info text-white" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="editCart(idUpdate, x)"></i></td>
+                                <td><i class="ph-radio-button btn btn-outline-primary"   routerLink="details/{{id}}/{{id2}}"></i></td>
+                                <td><input class="form-check-input" 
+                                    type="checkbox" 
+                                    [value]="id"
+                                    [checked]=""
+                                    (change)="bought($event)"
+                                    ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-12 col-md-1"></div>
+            <!-- <div class=" col-12 col-md-3"></div> -->
+        </div>
+    </div>
+</div>
+
+<!-- modal popup -->
+<div>
+    <div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-body">
+                    <div class="col mb-2">
+                        <div class=" mb-3 p-2">
+
+                            <div class="col mb-2">
+                                <div class="form-outline">
+                                    <label class="form-label h6" for="form3Example1">Name</label>
+                                    <input type="text" id="form3Example1" class="form-control" placeholder="Enter your expenses"  [(ngModel)]="cartName" />
+                                </div>
+                            </div>
+        
+                            <div class="col mb-2">
+                                <div class="form-outline">
+                                    <label class="form-label h6" for="form3Example2">Qty</label>
+                                    <input type="number" id="form3Example2" class="form-control" placeholder="No. of product" [(ngModel)]="cartQty"/>
+                                </div>
+                            </div>
+        
+                            <div class="col">
+                                <div class="form-outline">
+                                    <label class="form-label h6" for="form3Example2" >Cost</label>
+                                    <input type="number" id="form3Example2" class="form-control" placeholder="Enter the cost" [(ngModel)]="cartCost"/>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" (click)="updateCart()" >update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
